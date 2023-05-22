@@ -6,19 +6,36 @@ import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
 window.onload = function() {
-  let pronoun = ["the", "our"];
-  let adj = ["great", "big"];
-  let noun = ["jogger", "racoon"];
+  const pronoun = ["the", "our"];
+  const adj = ["great", "big"];
+  const noun = ["jogger", "racoon"];
+  const dotCom = ".com";
 
-  const selectedPronoun = pronoun[getRandomInt(pronoun.length)];
-  const selectedAdj = adj[getRandomInt(adj.length)];
-  const selectedNoun = noun[getRandomInt(noun.length)];
+  //FORMA 1 - MAPS
+  const domainNameMap = (pronouns, adjs, nouns) => {
+    pronouns.map(pronoun =>
+      adjs.map(adj =>
+        nouns.map(noun => console.log(`${pronoun}${adj}${noun}${dotCom}`))
+      )
+    );
+  };
+  console.log("MAP:", domainNameMap(pronoun, adj, noun));
 
-  const domainName = `${selectedPronoun}${selectedAdj}${selectedNoun}.com`;
+  //FORMA 2 - BUCLE FOR
+  const domainNameFor = (pronouns, adjs, nouns) => {
+    let generatedDomains = [];
 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
+    for (let i = 0; i < pronouns.length; i++) {
+      for (let j = 0; j < adjs.length; j++) {
+        for (let k = 0; k < nouns.length; k++) {
+          generatedDomains.push(`${pronouns[i]}${adjs[j]}${nouns[k]}${dotCom}`);
+        }
+      }
+    }
+    return generatedDomains;
+  };
 
-  console.log(domainName);
+  let domains = domainNameFor(pronoun, adj, noun).join("\n");
+
+  console.log("FOR", domains);
 };
